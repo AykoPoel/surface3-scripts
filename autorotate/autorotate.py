@@ -87,4 +87,4 @@ while True:
         time.sleep(1.0)
     if current_state != previous_state:
         refreshtouch()
-        print "re"
+        print "Tocuhscreen refreshed"
