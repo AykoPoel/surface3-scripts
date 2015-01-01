@@ -36,7 +36,7 @@ freq = 10.0  # frequency to read the accelerometer
 # Look for accelerometer
 while count <= 9:
     if os.path.exists('/sys/bus/iio/devices/iio:device' + str(count) + '/in_accel_scale') == True:
-        dpath = '/sys/bus/iio/devices/iio:device0/' # directory of accelerometer device (iio)
+        dpath = '/sys/bus/iio/devices/iio:device' + str(count) + '/' # directory of accelerometer device (iio)
         break
     count = count + 1
 #print(dpath)
