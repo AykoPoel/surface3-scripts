@@ -7,7 +7,8 @@ Autorotate: autorotate.py run with python2 needs
 
 autorotate.py
 =============
-Script for managing autorotation of the screen and deaktivation of the touchscreen through the pen.
+
+Script for managing autorotation of the screen and deactivation of the touchscreen through the pen.
 
 Instalation
 -----------
@@ -16,6 +17,15 @@ Instalation
   
 Usage
 -----
+Start script:
 ```
 $ python2 path/to/autorotate.py
+```
+Deactivate/reactivate autorotation:
+```
+$ python2 path/to/changeautorotatestatus.py
+```
+Deactivate/reactivate touch:
+```
+$ python2 path/to/touch.py
 ```
