@@ -11,8 +11,8 @@ Script for managing autorotation of the screen and deaktivation of the touchscre
 
 Instalation
 -----------
-  install libnotify and python2-gobject (needed for notifications)
-  copy autorotate.py, touch.py, changeautorotatestatus.py, touch.txt, status.txt in the same folder
+* install libnotify and python2-gobject (needed for notifications)
+* copy autorotate.py, touch.py, changeautorotatestatus.py, touch.txt, status.txt in the same folder
   
 Usage
 -----
