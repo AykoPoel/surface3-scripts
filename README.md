@@ -19,11 +19,11 @@ Usage
 -----
 Start script:
 ```
-$ python2 path/to/autorotate.py
+$ python2 /path/to/autorotate.py
 ```
 Deactivate/reactivate autorotation:
 ```
-$ python2 path/to/changeautorotatestatus.py
+$ python2 /path/to/changeautorotatestatus.py
 ```
 Deactivate/reactivate touch:
 ```
