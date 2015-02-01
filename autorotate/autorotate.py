@@ -52,6 +52,7 @@ state_dict = {0: "normal", 1: "inverted", 2: "right", 3: "left"}
 current_state = 0
 previous_tstate = "on"
 previousStylusProximityStatus = "out"
+firstrun = True
 #ACCELEROMETER
 with open(dpath + 'in_accel_scale') as f:
     scale = float(f.readline())
@@ -123,9 +124,10 @@ while True:
     if str(tstatus[0]) == "off" and stylusProximityStatus == "in":
         print("TOUCH: " + tstatus[0])
         print("  PEN: " + stylusProximityStatus)
-    elif str(tstatus[0]) == "on" and stylusProximityStatus == "in":
+    elif str(tstatus[0]) == "on" and stylusProximityStatus == "in" and firstrun == False:
         os.system('xinput disable "NTRG0001:01 1B96:1B05"')
         print("TOUCH: " + "off")
         print("  PEN: " + stylusProximityStatus)
     elif stylusProximityStatus == "out":
         print("  PEN: " + stylusProximityStatus)
+        firstrun == False
