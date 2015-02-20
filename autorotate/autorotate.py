@@ -27,6 +27,13 @@ def refreshtouch():
     os.system('xinput disable "NTRG0001:01 1B96:1B05"')
     os.system('xinput enable "NTRG0001:01 1B96:1B05"')
 
+def checkdisplays():
+    check_displays = "xrandr | grep -w 'connected'"
+    str_displays = str(subprocess.check_output(check_displays, shell=True).lower().rstrip())
+    list_displays = str_displays.splitlines()
+    int_displays = len(list_displays)
+    return int_displays
+
 #PARAMETERS
 count = 0
 path = os.path.abspath(os.path.dirname(os.path.abspath(__file__)))
@@ -57,39 +64,46 @@ firstrun = True
 with open(dpath + 'in_accel_scale') as f:
     scale = float(f.readline())
 while True:
+    multimonitor = False
+    int_displays = checkdisplays()
+    if int_displays > 1:
+        multimonitor = True
     time.sleep(1.0/freq)
     previous_state = current_state
     status = readFile(os.path.join(path, 'status.txt'))
-    if str(status[0]) == "on":
+    if str(status[0]) == "on" and multimonitor == False:
         with open(dpath + 'in_accel_x_raw', 'r') as fx:
             with open(dpath + 'in_accel_y_raw', 'r') as fy:
                 with open(dpath + 'in_accel_z_raw', 'r') as fz:
                     thex = float(fx.readline())
                     they = float(fy.readline())
                     thez = float(fz.readline())
-                    if (thex >= 65000 or thex <=650):
-                        if (they <= 65000 and they >= 64000):
-                            os.system(normal)
-                            current_state = 0
-                        if (they >= 650 and they <= 1100):
-                            os.system(inverted)
-                            current_state = 1
-                    if (thex <= 64999 and thex >= 650):
-                        if (thex >= 800 and thex <= 1000):
-                            os.system(right)
-                            current_state = 2
-                        if (thex >= 64500 and thex <=64700):
-                            os.system(left)
-                            current_state = 3
+                    if checkdisplays() == 1:
+                        if (thex >= 65000 or thex <=650):
+                            if (they <= 65000 and they >= 64000):
+                                os.system(normal)
+                                current_state = 0
+                            if (they >= 650 and they <= 1100):
+                                os.system(inverted)
+                                current_state = 1
+                        if (thex <= 64999 and thex >= 650):
+                            if (thex >= 800 and thex <= 1000):
+                                os.system(right)
+                                current_state = 2
+                            if (thex >= 64500 and thex <=64700):
+                                os.system(left)
+                                current_state = 3
 
         os.system('clear')
+        print("ExtDi: " + str(multimonitor))
         print("A-ROT: " + status[0])
         print("    x: " + str(thex))
         print("    y: " + str(they))
         print("    z: " + str(thez))
         print("  POS: " + state_dict[current_state])
-    if status[0] == "off":
+    if status[0] == "off" or multimonitor == True:
         os.system('clear')
+        print("ExtDi: " + str(multimonitor))
         print("A-ROT: " + status[0])
         print("    x: " + status[0])
         print("    y: " + status[0])
